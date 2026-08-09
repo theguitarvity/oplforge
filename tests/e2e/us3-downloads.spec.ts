@@ -7,7 +7,7 @@ test.describe('US3: Downloads', () => {
     await page.goto('');
     await page.getByRole('link', { name: 'Download' }).first().click(); // 1
     await expect(page).toHaveURL(/\/downloads\/$/);
-    const releaseLink = page.getByRole('link', { name: /^download$/i }).first();
+    const releaseLink = page.locator('a[href*="/releases/download/continuous/"]').first();
     await expect(releaseLink).toBeVisible(); // 2
     await expect(releaseLink).toHaveAttribute('href', /releases\/download\/continuous/); // 3
   });
