@@ -54,7 +54,7 @@ export const releases: ReleaseArtifactData[] = [
     architecture: 'x64',
     format: '.AppImage',
     version: 'Continuous',
-    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-linux-x64.AppImage`,
+    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-linux-x86_64.AppImage`,
     checksum: null,
   },
   {
@@ -63,7 +63,7 @@ export const releases: ReleaseArtifactData[] = [
     architecture: 'x64',
     format: '.deb',
     version: 'Continuous',
-    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-linux-x64.deb`,
+    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-linux-amd64.deb`,
     checksum: null,
   },
 ];
