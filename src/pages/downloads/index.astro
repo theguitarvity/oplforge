@@ -15,20 +15,26 @@ const hasAnyRelease = releases.some((release) => release.version !== null);
 >
   <section class="py-16">
     <Container>
-      <h1 class="font-display text-3xl font-bold text-text-primary">Downloads</h1>
-      <p class="mt-2 max-w-2xl text-text-secondary">
-        OPL Forge runs on Windows, macOS, and Linux.
+      <h1 class="font-display text-text-primary text-3xl font-bold">Downloads</h1>
+      <p class="text-text-secondary mt-2 max-w-2xl">
+        OPL Forge runs on Windows, macOS, and Linux. Continuous installers are rebuilt after every
+        successful CI run on the app's master branch. They are intended for testing and are not
+        code-signed.
         {
           !hasAnyRelease &&
-            ' There is no stable release published yet — check GitHub Releases for the latest status, or build from source.'
+            ' There is no downloadable build published yet — check GitHub Releases for the latest status, or build from source.'
         }
       </p>
 
       <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {releases.map((release) => <DownloadCard release={release} releasesUrl={releasesLink.url} />)}
+        {
+          releases.map((release) => (
+            <DownloadCard release={release} releasesUrl={releasesLink.url} />
+          ))
+        }
       </div>
 
-      <p class="mt-8 text-sm text-text-secondary">
+      <p class="text-text-secondary mt-8 text-sm">
         No release yet for your platform? Follow along or build from source on
         <a href={releasesLink.url} class="underline" target="_blank" rel="noopener noreferrer">
           GitHub Releases

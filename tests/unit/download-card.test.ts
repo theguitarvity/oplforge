@@ -9,19 +9,25 @@ describe('getDownloadState', () => {
 
   it('never renders a fabricated download state when version is null even if a URL exists', () => {
     expect(getDownloadState({ version: null, downloadUrl: 'https://example.com' })).toBe(
-      'no-release-yet'
+      'no-release-yet',
     );
   });
 
   it('renders the download state when a real version and URL are present', () => {
     expect(getDownloadState({ version: '1.0.0', downloadUrl: 'https://example.com' })).toBe(
-      'download'
+      'download',
     );
   });
 
-  it('all current real release entries render the honest no-release-yet state', () => {
-    for (const release of releases) {
-      expect(getDownloadState(release)).toBe('no-release-yet');
-    }
+  it('offers downloads only for artifacts produced by continuous CI', () => {
+    expect(releases.find((release) => release.id === 'windows-x64')).toMatchObject({
+      version: 'Continuous',
+      downloadUrl:
+        'https://github.com/theguitarvity/src-app-oplforge/releases/download/continuous/OPL-Forge-continuous-x64-Setup.exe',
+    });
+    expect(releases.find((release) => release.id === 'windows-arm64')).toMatchObject({
+      version: null,
+      downloadUrl: null,
+    });
   });
 });

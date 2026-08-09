@@ -8,21 +8,18 @@ export interface ReleaseArtifactData {
   checksum: string | null;
 }
 
-/**
- * Real current release state: no public installer is published yet (the
- * source repository's README points users to GitHub Releases or building
- * from source) — see research.md Decision 7. `version`/`downloadUrl` are
- * intentionally `null`, never a fabricated value.
- */
+const continuousReleaseBase =
+  'https://github.com/theguitarvity/src-app-oplforge/releases/download/continuous';
+
 export const releases: ReleaseArtifactData[] = [
   {
     id: 'windows-x64',
     platform: 'windows',
     architecture: 'x64',
     format: '.exe',
-    version: null,
-    downloadUrl: null,
-    checksum: null
+    version: 'Continuous',
+    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-x64-Setup.exe`,
+    checksum: null,
   },
   {
     id: 'windows-arm64',
@@ -31,42 +28,42 @@ export const releases: ReleaseArtifactData[] = [
     format: '.exe',
     version: null,
     downloadUrl: null,
-    checksum: null
+    checksum: null,
   },
   {
     id: 'macos-intel',
     platform: 'macos',
     architecture: 'x64',
     format: '.dmg',
-    version: null,
-    downloadUrl: null,
-    checksum: null
+    version: 'Continuous',
+    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-mac-x64.dmg`,
+    checksum: null,
   },
   {
     id: 'macos-apple-silicon',
     platform: 'macos',
     architecture: 'arm64',
     format: '.dmg',
-    version: null,
-    downloadUrl: null,
-    checksum: null
+    version: 'Continuous',
+    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-mac-arm64.dmg`,
+    checksum: null,
   },
   {
     id: 'linux-appimage',
     platform: 'linux',
     architecture: 'x64',
     format: '.AppImage',
-    version: null,
-    downloadUrl: null,
-    checksum: null
+    version: 'Continuous',
+    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-linux-x64.AppImage`,
+    checksum: null,
   },
   {
     id: 'linux-deb',
     platform: 'linux',
     architecture: 'x64',
     format: '.deb',
-    version: null,
-    downloadUrl: null,
-    checksum: null
-  }
+    version: 'Continuous',
+    downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-linux-x64.deb`,
+    checksum: null,
+  },
 ];
