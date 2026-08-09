@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import DownloadCard from '../../components/product/DownloadCard.astro';
+import { releases } from '../../content/config/releases';
+import { site } from '../../content/config/site';
+
+const releasesLink = site.links.find((link) => link.id === 'github-releases')!;
+const hasAnyRelease = releases.some((release) => release.version !== null);
+---
+
+<BaseLayout
+  title="Downloads"
+  description="Download OPL Forge for Windows, macOS, or Linux, or check GitHub Releases for the latest build."
+>
+  <section class="py-16">
+    <Container>
+      <h1 class="font-display text-3xl font-bold text-text-primary">Downloads</h1>
+      <p class="mt-2 max-w-2xl text-text-secondary">
+        OPL Forge runs on Windows, macOS, and Linux.
+        {
+          !hasAnyRelease &&
+            ' There is no stable release published yet — check GitHub Releases for the latest status, or build from source.'
+        }
+      </p>
+
+      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {releases.map((release) => <DownloadCard release={release} releasesUrl={releasesLink.url} />)}
+      </div>
+
+      <p class="mt-8 text-sm text-text-secondary">
+        No release yet for your platform? Follow along or build from source on
+        <a href={releasesLink.url} class="underline" target="_blank" rel="noopener noreferrer">
+          GitHub Releases
+        </a>.
+      </p>
+    </Container>
+  </section>
+</BaseLayout>

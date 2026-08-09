@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import Button from '../ui/Button.astro';
+import PlatformBadge from '../product/PlatformBadge.astro';
+import { url } from '../../utils/url';
+import { site } from '../../content/config/site';
+import { screenshotAssets } from '../../utils/screenshotAssets';
+
+const dashboardImg = screenshotAssets['dashboard.jpg'];
+---
+
+<section class="border-b border-border bg-surface">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:py-20 lg:px-8"
+  >
+    <div class="flex-1">
+      <h1 class="font-display text-4xl font-bold leading-tight text-text-primary sm:text-5xl">
+        {site.tagline}
+      </h1>
+      <p class="mt-4 max-w-xl text-lg text-text-secondary">
+        Install, organize, diagnose, and maintain your PlayStation 2 library from one modern,
+        desktop workspace — built on real screenshots, not mockups.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-2" aria-label="Supported platforms">
+        <PlatformBadge platform="windows" status="AVAILABLE" />
+        <PlatformBadge platform="macos" status="AVAILABLE" />
+        <PlatformBadge platform="linux" status="AVAILABLE" />
+        <PlatformBadge platform="android" status="PLANNED" />
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button href={url('/downloads')} variant="primary">Download</Button>
+        <Button
+          href="https://github.com/theguitarvity/src-app-oplforge"
+          variant="secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </Button>
+        <Button href={url('/docs')} variant="ghost">Documentation</Button>
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <Image
+        src={dashboardImg}
+        alt="OPL Forge home workspace showing connected device space, game count, and health metrics"
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        class="w-full rounded-base border border-border shadow-2xl"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>

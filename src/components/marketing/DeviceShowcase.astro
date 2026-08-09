@@ -1,0 +1,20 @@
+---
+import Container from '../ui/Container.astro';
+import ScreenshotGallery from '../product/ScreenshotGallery.astro';
+import { screenshots } from '../../content/config/screenshots';
+
+const deviceShots = screenshots.filter((shot) => shot.id === 'devices');
+---
+
+<section class="border-b border-border py-16" id="device-tools">
+  <Container>
+    <h2 class="font-display text-3xl font-bold text-text-primary">Device & diagnostic tools</h2>
+    <p class="mt-2 max-w-2xl text-text-secondary">
+      The Devices hub shows real filesystem capacity, per-device health, and a diagnostics tab —
+      all backed by the actual connected storage device, not simulated data.
+    </p>
+    <div class="mt-8">
+      <ScreenshotGallery screenshots={deviceShots} />
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,49 @@
+---
+import { url } from '../../utils/url';
+import { site } from '../../content/config/site';
+
+const year = new Date().getFullYear();
+const visibleLinks = site.links.filter((link) => link.visible);
+---
+
+<footer class="border-t border-border bg-surface">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+      <div>
+        <a href={url('/')} class="font-display text-lg font-bold text-text-primary">
+          OPL <span class="text-primary-text">Forge</span>
+        </a>
+        <p class="mt-2 max-w-sm text-sm text-text-muted">{site.tagline}</p>
+      </div>
+
+      <nav aria-label="Footer">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          {
+            visibleLinks.map((link) => (
+              <li>
+                <a
+                  href={link.url}
+                  class="text-text-secondary hover:text-text-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div
+      class="mt-8 flex flex-col gap-2 border-t border-border pt-6 text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>&copy; {year} {site.name}. Open-source under the {site.license} license.</p>
+      <p>
+        OPL Forge is an independent, community-built tool. It is not affiliated with or endorsed
+        by Sony Interactive Entertainment.
+      </p>
+    </div>
+  </div>
+</footer>

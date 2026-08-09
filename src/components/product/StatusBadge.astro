@@ -1,0 +1,43 @@
+---
+export type MaturityStatus = 'AVAILABLE' | 'IN_DEVELOPMENT' | 'PLANNED' | 'EXPERIMENTAL';
+
+export interface Props {
+  status: MaturityStatus;
+  class?: string;
+}
+
+const { status, class: className = '' } = Astro.props;
+
+const variantMap: Record<MaturityStatus, 'success' | 'info' | 'neutral' | 'warning'> = {
+  AVAILABLE: 'success',
+  IN_DEVELOPMENT: 'info',
+  PLANNED: 'neutral',
+  EXPERIMENTAL: 'warning'
+};
+
+const labelMap: Record<MaturityStatus, string> = {
+  AVAILABLE: 'Available',
+  IN_DEVELOPMENT: 'In Development',
+  PLANNED: 'Planned',
+  EXPERIMENTAL: 'Experimental'
+};
+
+const variant = variantMap[status];
+const colorClasses: Record<string, string> = {
+  success: 'bg-success/15 text-success border-success/30',
+  info: 'bg-info/15 text-info border-info/30',
+  neutral: 'bg-surface-container-high text-text-secondary border-border',
+  warning: 'bg-warning/15 text-warning border-warning/30'
+};
+---
+
+<span
+  data-status={status}
+  class:list={[
+    'inline-flex items-center gap-1.5 rounded-base border px-2.5 py-1 text-xs font-medium uppercase tracking-wide',
+    colorClasses[variant],
+    className
+  ]}
+>
+  {labelMap[status]}
+</span>

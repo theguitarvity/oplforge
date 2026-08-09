@@ -1,0 +1,66 @@
+---
+import Container from '../ui/Container.astro';
+import FeatureCard from '../product/FeatureCard.astro';
+import ScreenshotGallery from '../product/ScreenshotGallery.astro';
+import StatusBadge from '../product/StatusBadge.astro';
+import { url } from '../../utils/url';
+import { productSurfaces } from '../../content/config/productSurfaces';
+import { screenshots as allScreenshots } from '../../content/config/screenshots';
+import { features } from '../../content/config/features';
+
+export interface Props {
+  /** Show every surface with a full gallery, or just a condensed preview. */
+  variant?: 'full' | 'condensed';
+}
+
+const { variant = 'full' } = Astro.props;
+const surfaces = variant === 'condensed' ? productSurfaces.slice(0, 3) : productSurfaces;
+---
+
+<section class="border-b border-border py-16">
+  <Container>
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 class="font-display text-3xl font-bold text-text-primary">
+          Everything your OPL library needs
+        </h2>
+        <p class="mt-2 max-w-2xl text-text-secondary">
+          A real, screenshot-backed tour of every shipped area of OPL Forge.
+        </p>
+      </div>
+      {
+        variant === 'condensed' && (
+          <a href={url('/features')} class="text-sm font-semibold text-primary-text hover:text-primary-hover">
+            See full tour &rarr;
+          </a>
+        )
+      }
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {features.map((feature) => <FeatureCard feature={feature} />)}
+    </div>
+
+    <div class="mt-16 flex flex-col gap-16">
+      {
+        surfaces.map((surface) => {
+          const surfaceShots = allScreenshots.filter(
+            (shot) => shot.productSurfaceId === surface.id
+          );
+          return (
+            <div id={surface.id} class="scroll-mt-24">
+              <div class="flex flex-wrap items-center gap-3">
+                <h3 class="font-display text-xl font-semibold text-text-primary">{surface.name}</h3>
+                <StatusBadge status={surface.status} />
+              </div>
+              <p class="mt-2 max-w-2xl text-sm text-text-secondary">{surface.description}</p>
+              <div class="mt-4">
+                <ScreenshotGallery screenshots={surfaceShots} />
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </Container>
+</section>

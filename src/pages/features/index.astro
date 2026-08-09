@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductTour from '../../components/marketing/ProductTour.astro';
+import PlatformComparison from '../../components/marketing/PlatformComparison.astro';
+import DeviceShowcase from '../../components/marketing/DeviceShowcase.astro';
+import FragmentationShowcase from '../../components/marketing/FragmentationShowcase.astro';
+import InstallationShowcase from '../../components/marketing/InstallationShowcase.astro';
+---
+
+<BaseLayout
+  title="Features"
+  description="A real, screenshot-backed tour of every shipped area of OPL Forge, plus an honest look at platform support."
+>
+  <ProductTour variant="full" />
+  <DeviceShowcase />
+  <FragmentationShowcase />
+  <InstallationShowcase />
+  <PlatformComparison />
+</BaseLayout>

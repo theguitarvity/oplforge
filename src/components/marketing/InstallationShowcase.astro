@@ -1,0 +1,72 @@
+---
+import Container from '../ui/Container.astro';
+import ScreenshotGallery from '../product/ScreenshotGallery.astro';
+import Badge from '../ui/Badge.astro';
+import { url } from '../../utils/url';
+import { screenshots } from '../../content/config/screenshots';
+
+const stages = [
+  {
+    title: 'Source selection',
+    shotId: 'prepare',
+    available: true,
+    note: 'Prepare a device before importing (local sources available today).'
+  },
+  {
+    title: 'Metadata & Game-ID review',
+    shotId: 'ps2-import',
+    available: true,
+    note: 'Automatic Game-ID detection with FAT32/USBExtreme-aware planning.'
+  },
+  {
+    title: 'Component download & progress',
+    shotId: 'download-pacman-progress',
+    available: true,
+    note: 'Resumable, staged downloads for required OPL components.'
+  },
+  {
+    title: 'Legal confirmation',
+    shotId: 'legal-confirmation',
+    available: true,
+    note: 'A per-item confirmation step before anything is queued.'
+  }
+];
+
+const shotsById = Object.fromEntries(screenshots.map((shot) => [shot.id, shot]));
+---
+
+<section class="border-b border-border py-16" id="installation">
+  <Container>
+    <h2 class="font-display text-3xl font-bold text-text-primary">Installation workflow</h2>
+    <p class="mt-2 max-w-2xl text-text-secondary">
+      A real, screenshot-backed sequence of the add-game/installation flow, with only
+      currently-supported sources labeled available.
+    </p>
+
+    <ol class="mt-8 flex flex-col gap-10">
+      {
+        stages.map((stage, index) => (
+          <li>
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="flex h-7 w-7 items-center justify-center rounded-base bg-primary text-sm font-semibold text-on-primary">
+                {index + 1}
+              </span>
+              <h3 class="font-display text-lg font-semibold text-text-primary">{stage.title}</h3>
+              <Badge variant={stage.available ? 'success' : 'neutral'}>
+                {stage.available ? 'Available source' : 'Not yet available'}
+              </Badge>
+            </div>
+            <p class="mt-2 text-sm text-text-secondary">{stage.note}</p>
+            <div class="mt-4 max-w-xl">
+              <ScreenshotGallery screenshots={shotsById[stage.shotId] ? [shotsById[stage.shotId]] : []} />
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="mt-4 text-sm text-text-muted">
+      Read more in <a href={url('/docs/downloads-components')} class="underline">Downloads & Components</a>.
+    </p>
+  </Container>
+</section>

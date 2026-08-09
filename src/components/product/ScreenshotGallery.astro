@@ -1,0 +1,39 @@
+---
+import { getImage } from 'astro:assets';
+import ScreenshotLightbox from './ScreenshotLightbox';
+import { screenshotAssets } from '../../utils/screenshotAssets';
+import { isConceptScreenshot } from '../../utils/screenshotDisplay';
+import type { ProductScreenshotData } from '../../content/config/screenshots';
+
+export interface Props {
+  screenshots: ProductScreenshotData[];
+}
+
+const { screenshots } = Astro.props;
+
+const images = await Promise.all(
+  screenshots.map(async (shot) => {
+    const asset = screenshotAssets[shot.filePath];
+    const optimized = await getImage({ src: asset, width: 960 });
+    return {
+      src: optimized.src,
+      width: optimized.attributes.width as number,
+      height: optimized.attributes.height as number,
+      alt: shot.altText,
+      caption: shot.caption,
+      concept: isConceptScreenshot(shot)
+    };
+  })
+);
+---
+
+{
+  images.length > 0 ? (
+    <ScreenshotLightbox client:visible images={images} />
+  ) : (
+    <p class="rounded-base border border-dashed border-border bg-surface-elevated px-4 py-6 text-sm text-text-muted">
+      No screenshot captured for this area yet — this is a documented gap, not a placeholder image.
+      See the <a href="https://github.com/theguitarvity/src-app-oplforge" class="underline">asset inventory</a>.
+    </p>
+  )
+}

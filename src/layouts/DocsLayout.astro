@@ -1,0 +1,46 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import { url } from '../utils/url';
+import { getCollection } from 'astro:content';
+
+export interface Props {
+  title: string;
+  description: string;
+  currentSlug?: string;
+}
+
+const { title, description, currentSlug } = Astro.props;
+const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="py-12">
+    <Container>
+      <div class="flex flex-col gap-8 lg:flex-row">
+        <aside class="lg:w-64 lg:flex-none">
+          <nav aria-label="Documentation">
+            <ul class="flex flex-col gap-1">
+              {
+                docs.map((doc) => (
+                  <li>
+                    <a
+                      href={url(`/docs/${doc.id}`)}
+                      aria-current={currentSlug === doc.id ? 'page' : undefined}
+                      class="block rounded-base px-3 py-2 text-sm text-text-secondary hover:bg-surface-container hover:text-text-primary aria-[current=page]:bg-surface-container aria-[current=page]:text-primary-text"
+                    >
+                      {doc.data.title}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </aside>
+        <div class="min-w-0 flex-1">
+          <slot />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

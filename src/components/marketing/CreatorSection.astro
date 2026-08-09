@@ -1,0 +1,27 @@
+---
+import Container from '../ui/Container.astro';
+import { site } from '../../content/config/site';
+
+const linkedinLink = site.links.find((link) => link.id === 'linkedin');
+const githubLink = site.links.find((link) => link.id === 'github-repo')!;
+---
+
+<section class="py-12" id="creator">
+  <Container>
+    <div class="rounded-base border border-border bg-surface-elevated p-6 text-sm text-text-secondary">
+      <p>
+        OPL Forge is built and maintained by <strong class="text-text-primary">Victor Lucas Lopes Silva</strong>.
+      </p>
+      <p class="mt-2 flex flex-wrap gap-4">
+        <a href={githubLink.url} class="underline" target="_blank" rel="noopener noreferrer">GitHub</a>
+        {
+          linkedinLink && (
+            <a href={linkedinLink.url} class="underline" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+          )
+        }
+      </p>
+    </div>
+  </Container>
+</section>

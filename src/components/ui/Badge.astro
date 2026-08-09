@@ -1,0 +1,26 @@
+---
+export interface Props {
+  variant?: 'neutral' | 'success' | 'warning' | 'error' | 'info';
+  class?: string;
+}
+
+const { variant = 'neutral', class: className = '' } = Astro.props;
+
+const variants: Record<string, string> = {
+  neutral: 'bg-surface-container-high text-text-secondary border-border',
+  success: 'bg-success/15 text-success border-success/30',
+  warning: 'bg-warning/15 text-warning border-warning/30',
+  error: 'bg-error/15 text-error border-error/30',
+  info: 'bg-info/15 text-info border-info/30'
+};
+---
+
+<span
+  class:list={[
+    'inline-flex items-center gap-1.5 rounded-base border px-2.5 py-1 text-xs font-medium uppercase tracking-wide',
+    variants[variant],
+    className
+  ]}
+>
+  <slot />
+</span>

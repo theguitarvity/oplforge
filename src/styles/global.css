@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@config '../../tailwind.config.mjs';
+@import './tokens.css';
+
+@layer base {
+  body {
+    @apply bg-background font-body text-text-primary;
+  }
+}

@@ -1,0 +1,28 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import { url } from '../../utils/url';
+import { getCollection } from 'astro:content';
+
+const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<DocsLayout title="Documentation" description="OPL Forge documentation: getting started, library management, diagnostics, and more.">
+  <h1 class="font-display text-3xl font-bold text-text-primary">Documentation</h1>
+  <p class="mt-2 max-w-2xl text-text-secondary">
+    Every major documentation topic, reachable with a stable URL.
+  </p>
+
+  <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    {
+      docs.map((doc) => (
+        <a
+          href={url(`/docs/${doc.id}`)}
+          class="rounded-base border border-border bg-surface-elevated p-5 transition-colors hover:border-primary"
+        >
+          <h2 class="font-display font-semibold text-text-primary">{doc.data.title}</h2>
+          <p class="mt-1 text-sm text-text-secondary">{doc.data.summary}</p>
+        </a>
+      ))
+    }
+  </div>
+</DocsLayout>

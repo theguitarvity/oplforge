@@ -1,0 +1,53 @@
+/**
+ * Forge Dark design tokens (constitution Article V).
+ * Single source of truth for all color/typography/spacing/radius values.
+ * Components MUST reference these tokens (via Tailwind utilities) rather
+ * than introducing ad hoc colors.
+ */
+:root {
+  /* Core surfaces */
+  --color-background: #0e0c12;
+  --color-surface: #141218;
+  --color-surface-elevated: #1c1a22;
+  --color-surface-container: #201e27;
+  --color-surface-container-high: #28252f;
+
+  /* Primary / accent */
+  --color-primary: #7c4dff;
+  --color-primary-hover: #9370ff;
+  --color-primary-container: #7c4dff;
+  --color-on-primary: #ffffff;
+  /* Lighter accent shade for text/links on the dark background: #7c4dff only
+     reaches ~4.0:1 contrast on --color-background, below WCAG AA's 4.5:1 for
+     normal text. Use this token (not --color-primary) whenever the brand
+     accent color is applied as foreground text rather than a button fill. */
+  --color-primary-text: #9370ff;
+
+  /* Text */
+  --color-text-primary: #f2f0f5;
+  --color-text-secondary: #b8b3c4;
+  --color-text-muted: #948eaa;
+
+  /* Borders */
+  --color-border: #2a2733;
+
+  /* Semantic status */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+  --color-info: #38bdf8;
+
+  /* Per-item runtime/UI data state (distinct from feature-maturity status) */
+  --color-fragmented: #f59e0b;
+  --color-verifying: #38bdf8;
+  --color-ready: #22c55e;
+
+  /* Typography */
+  --font-display: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Spacing / radius scale */
+  --spacing-base: 4px;
+  --radius-base: 8px;
+}

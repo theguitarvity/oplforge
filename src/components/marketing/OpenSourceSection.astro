@@ -1,0 +1,41 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import { site } from '../../content/config/site';
+
+const contributionTypes = [
+  'Bug reports and reproduction steps',
+  'Feature requests grounded in real PS2/OPL workflows',
+  'Code contributions (pull requests)',
+  'Documentation improvements',
+  'Testing on real hardware/devices'
+];
+
+const githubLink = site.links.find((link) => link.id === 'github-repo')!;
+---
+
+<section class="border-b border-border py-16" id="open-source">
+  <Container>
+    <h2 class="font-display text-3xl font-bold text-text-primary">Open source</h2>
+    <p class="mt-2 max-w-2xl text-text-secondary">
+      OPL Forge is {site.license}-licensed and open to contributions. This project is small and
+      real — we don't publish fabricated star, fork, or download counts.
+    </p>
+
+    <ul class="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
+      {
+        contributionTypes.map((type) => (
+          <li class="rounded-base border border-border bg-surface-elevated px-4 py-3 text-sm text-text-secondary">
+            {type}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-6">
+      <Button href={githubLink.url} variant="secondary" target="_blank" rel="noopener noreferrer">
+        View on GitHub
+      </Button>
+    </div>
+  </Container>
+</section>

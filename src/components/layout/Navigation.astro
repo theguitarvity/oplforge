@@ -1,0 +1,86 @@
+---
+import { url } from '../../utils/url';
+
+const navItems = [
+  { label: 'Features', href: url('/features') },
+  { label: 'Downloads', href: url('/downloads') },
+  { label: 'Documentation', href: url('/docs') },
+  { label: 'Roadmap', href: url('/roadmap') },
+  { label: 'Support', href: url('/support') }
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+    aria-label="Primary"
+  >
+    <a href={url('/')} class="font-display text-lg font-bold text-text-primary">
+      OPL <span class="text-primary-text">Forge</span>
+    </a>
+
+    <ul class="hidden items-center gap-6 md:flex">
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+              class="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary aria-[current=page]:text-primary-text"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a
+        href={url('/downloads')}
+        class="rounded-base bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover"
+      >
+        Download
+      </a>
+      <button
+        id="mobile-nav-toggle"
+        type="button"
+        class="rounded-base border border-border p-2 text-text-primary md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Toggle navigation menu"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <ul id="mobile-nav" class="hidden flex-col gap-1 border-t border-border px-4 pb-4 md:hidden">
+    {
+      navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="block rounded-base px-3 py-2 text-sm font-medium text-text-secondary hover:bg-surface-container hover:text-text-primary"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</header>
+
+<script>
+  const toggle = document.getElementById('mobile-nav-toggle');
+  const menu = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('flex');
+    menu?.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  });
+</script>

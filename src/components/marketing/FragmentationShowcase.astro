@@ -1,0 +1,50 @@
+---
+import Container from '../ui/Container.astro';
+import ScreenshotGallery from '../product/ScreenshotGallery.astro';
+import { url } from '../../utils/url';
+import { screenshots } from '../../content/config/screenshots';
+
+const fragmentationShots = screenshots.filter((shot) => shot.id === 'fragmentation');
+
+const states = [
+  { label: 'Contiguous', description: 'No fragmentation detected.' },
+  { label: 'Fragmented', description: 'Fragmentation detected.' },
+  { label: 'Partially fragmented', description: 'Some fragments detected; may still be playable.' },
+  { label: 'Incomplete', description: 'Analysis could not finish.' },
+  { label: 'Invalid', description: 'The file failed validation.' },
+  { label: 'Unverifiable', description: "This platform/environment can't confirm the result." }
+];
+---
+
+<section class="border-b border-border py-16" id="fragmentation">
+  <Container>
+    <h2 class="font-display text-3xl font-bold text-text-primary">Fragmentation diagnostics</h2>
+    <p class="mt-2 max-w-2xl text-text-secondary">
+      Physical fragmentation can cause real hardware issues even when a title plays fine on a PC
+      or emulator. OPL Forge reports six distinct diagnostic states — including an honest
+      <strong class="text-text-primary">unverifiable</strong> state when a result can't be confirmed
+      on the current platform, rather than guessing.
+    </p>
+
+    <ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        states.map((state) => (
+          <li class="rounded-base border border-border bg-surface-elevated p-4">
+            <p class="font-medium text-text-primary">{state.label}</p>
+            <p class="mt-1 text-sm text-text-secondary">{state.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-8">
+      <ScreenshotGallery screenshots={fragmentationShots} />
+    </div>
+
+    <p class="mt-4 text-sm text-text-muted">
+      Read more in <a href={url('/docs/understanding-fragmentation-repair')} class="underline">
+        Understanding Fragmentation & Repair
+      </a>.
+    </p>
+  </Container>
+</section>

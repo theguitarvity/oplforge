@@ -1,0 +1,60 @@
+---
+import Container from '../ui/Container.astro';
+import StatusBadge from '../product/StatusBadge.astro';
+
+const rows = [
+  {
+    platform: 'Desktop (Windows / macOS / Linux)',
+    status: 'AVAILABLE' as const,
+    note: 'The real, shipped OPL Forge application — Electron + React, cross-platform.'
+  },
+  {
+    platform: 'Android',
+    status: 'PLANNED' as const,
+    note: 'Earliest planning stage only. No screens, UI, or builds exist yet.'
+  }
+];
+---
+
+<section class="border-b border-border py-16">
+  <Container>
+    <h2 class="font-display text-3xl font-bold text-text-primary">Platform support</h2>
+    <p class="mt-2 max-w-2xl text-text-secondary">
+      An honest look at where OPL Forge runs today. Tablet is not a distinct product platform —
+      it only describes this website's own responsive layout, not a second app surface.
+    </p>
+
+    <div class="mt-8 overflow-hidden rounded-base border border-border">
+      <table class="w-full text-left text-sm">
+        <thead class="bg-surface-elevated text-text-secondary">
+          <tr>
+            <th scope="col" class="px-4 py-3 font-medium">Platform</th>
+            <th scope="col" class="px-4 py-3 font-medium">Status</th>
+            <th scope="col" class="px-4 py-3 font-medium">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr class="border-t border-border">
+                <td class="px-4 py-3 font-medium text-text-primary">{row.platform}</td>
+                <td class="px-4 py-3">
+                  <StatusBadge status={row.status} />
+                </td>
+                <td class="px-4 py-3 text-text-secondary">{row.note}</td>
+              </tr>
+            ))
+          }
+          <tr class="border-t border-border">
+            <td class="px-4 py-3 font-medium text-text-muted">Tablet</td>
+            <td class="px-4 py-3 text-text-muted">N/A</td>
+            <td class="px-4 py-3 text-text-muted">
+              Not a distinct product platform — this website is responsive, but OPL Forge has no
+              separate tablet app.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </Container>
+</section>
