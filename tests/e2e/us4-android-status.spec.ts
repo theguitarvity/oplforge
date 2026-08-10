@@ -1,13 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('US4: Android status', () => {
-  test('Android is clearly labeled Planned without implying current availability', async ({
-    page
-  }) => {
+  test('Android is clearly labeled Available now that it has shipped', async ({ page }) => {
     await page.goto('features/');
     const androidRow = page.getByText('Android', { exact: true }).first();
     await expect(androidRow).toBeVisible();
-    await expect(page.getByText('Planned', { exact: false }).first()).toBeVisible();
+    await expect(page.getByText('Available', { exact: false }).first()).toBeVisible();
   });
 
   test('Tablet is not presented as a shipped app platform', async ({ page }) => {

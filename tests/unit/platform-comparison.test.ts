@@ -3,25 +3,21 @@ import { productSurfaces } from '../../src/content/config/productSurfaces';
 import { releases } from '../../src/content/config/releases';
 
 describe('Android platform entry (US4 contract invariant)', () => {
-  it('has status PLANNED', () => {
+  it('has status AVAILABLE', () => {
     const android = productSurfaces.find((s) => s.id === 'android');
-    expect(android?.status).toBe('PLANNED');
+    expect(android?.status).toBe('AVAILABLE');
   });
 
-  it('has zero screenshots', () => {
-    const android = productSurfaces.find((s) => s.id === 'android');
-    expect(android?.screenshotIds).toEqual([]);
-  });
-
-  it('does not appear in the releases collection', () => {
-    expect(releases.some((r) => (r.platform as string) === 'android')).toBe(false);
+  it('appears in the releases collection with a working download', () => {
+    const androidRelease = releases.find((r) => (r.platform as string) === 'android');
+    expect(androidRelease?.version).not.toBeNull();
+    expect(androidRelease?.downloadUrl).not.toBeNull();
   });
 });
 
-describe('Desktop platforms', () => {
+describe('All platforms', () => {
   it('are all AVAILABLE', () => {
-    const desktopSurfaces = productSurfaces.filter((s) => s.id !== 'android');
-    for (const surface of desktopSurfaces) {
+    for (const surface of productSurfaces) {
       expect(surface.status).toBe('AVAILABLE');
     }
   });

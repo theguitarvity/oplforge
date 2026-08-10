@@ -59,17 +59,16 @@ describe('releases', () => {
     }
   });
 
-  it('does not include android while it is PLANNED', () => {
+  it('includes android now that it is AVAILABLE', () => {
     const androidSurface = productSurfaces.find((s) => s.id === 'android');
-    expect(androidSurface?.status).toBe('PLANNED');
-    expect(releases.some((r) => (r.platform as string) === 'android')).toBe(false);
+    expect(androidSurface?.status).toBe('AVAILABLE');
+    expect(releases.some((r) => (r.platform as string) === 'android')).toBe(true);
   });
 });
 
 describe('roadmap', () => {
-  it('android roadmap item is PLANNED', () => {
-    const android = roadmap.find((r) => r.id === 'android-app');
-    expect(android?.status).toBe('PLANNED');
+  it('has no shipped items left on it', () => {
+    expect(roadmap.find((r) => r.id === 'android-app')).toBeUndefined();
   });
 });
 

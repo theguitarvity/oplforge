@@ -104,8 +104,8 @@ export const productSurfaces: ProductSurfaceData[] = [
     id: 'android',
     name: 'Android application',
     description:
-      'A future Android companion is in early planning only; no screens or builds exist yet.',
-    status: 'PLANNED',
+      'A companion app for library management and SMB sharing to a PS2, built on Storage Access Framework. Continuous debug-signed APKs are published after every successful build.',
+    status: 'AVAILABLE',
     platform: ['android'],
     screenshotIds: [],
     relatedDocSlugs: []
