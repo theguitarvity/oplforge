@@ -11,15 +11,15 @@ const hasAnyRelease = releases.some((release) => release.version !== null);
 
 <BaseLayout
   title="Downloads"
-  description="Download OPL Forge for Windows, macOS, or Linux, or check GitHub Releases for the latest build."
+  description="Download OPL Forge for Windows, macOS, Linux, or Android, or check GitHub Releases for the latest build."
 >
   <section class="py-16">
     <Container>
       <h1 class="font-display text-text-primary text-3xl font-bold">Downloads</h1>
       <p class="text-text-secondary mt-2 max-w-2xl">
-        OPL Forge runs on Windows, macOS, and Linux. Continuous installers are rebuilt after every
-        successful CI run on the app's master branch. They are intended for testing and are not
-        code-signed.
+        OPL Forge runs on Windows, macOS, Linux, and Android. Continuous installers are rebuilt
+        after every successful CI run on the app's master branch. They are intended for testing
+        and are not code-signed.
         {
           !hasAnyRelease &&
             ' There is no downloadable build published yet — check GitHub Releases for the latest status, or build from source.'

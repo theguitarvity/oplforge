@@ -39,7 +39,7 @@ const releasesCollection = defineCollection({
   loader: () => releases,
   schema: z.object({
     id: z.string(),
-    platform: z.enum(['windows', 'macos', 'linux']),
+    platform: platformId,
     architecture: z.string().nullable(),
     format: z.string(),
     version: z.string().nullable(),

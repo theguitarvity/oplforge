@@ -1,6 +1,6 @@
 export interface ReleaseArtifactData {
   id: string;
-  platform: 'windows' | 'macos' | 'linux';
+  platform: 'windows' | 'macos' | 'linux' | 'android';
   architecture: string | null;
   format: string;
   version: string | null;
@@ -64,6 +64,15 @@ export const releases: ReleaseArtifactData[] = [
     format: '.deb',
     version: 'Continuous',
     downloadUrl: `${continuousReleaseBase}/OPL-Forge-continuous-linux-amd64.deb`,
+    checksum: null,
+  },
+  {
+    id: 'android',
+    platform: 'android',
+    architecture: null,
+    format: '.apk',
+    version: 'Continuous',
+    downloadUrl: `${continuousReleaseBase}/OPL-Forge-Mobile-continuous.apk`,
     checksum: null,
   },
 ];
