@@ -28,8 +28,9 @@ describe('hasDocumentedGap', () => {
     expect(hasDocumentedGap({ screenshotIds: ['dashboard'] })).toBe(false);
   });
 
-  it('android (no screenshots published yet) has a documented gap', () => {
-    const android = productSurfaces.find((s) => s.id === 'android')!;
-    expect(hasDocumentedGap(android)).toBe(true);
+  it('every current product surface has at least one real screenshot', () => {
+    for (const surface of productSurfaces) {
+      expect(hasDocumentedGap(surface)).toBe(false);
+    }
   });
 });

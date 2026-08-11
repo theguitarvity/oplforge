@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { url } from '../../utils/url';
+import logo from '../../assets/brand/logo.png';
 
 const navItems = [
   { label: 'Features', href: url('/features') },
@@ -17,7 +19,8 @@ const currentPath = Astro.url.pathname;
     class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
     aria-label="Primary"
   >
-    <a href={url('/')} class="font-display text-lg font-bold text-text-primary">
+    <a href={url('/')} class="flex items-center gap-2 font-display text-lg font-bold text-text-primary">
+      <Image src={logo} alt="" width={28} height={28} loading="eager" class="h-7 w-7" />
       OPL <span class="text-primary-text">Forge</span>
     </a>
 

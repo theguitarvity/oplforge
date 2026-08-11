@@ -29,29 +29,30 @@ export const productSurfaces: ProductSurfaceData[] = [
     id: 'devices',
     name: 'Devices',
     description:
-      'Multi-tab device hub: Overview, Games, OPL Files, and Diagnostics for connected PS2 storage devices.',
+      'Multi-tab device hub: Overview, Manage Devices (prepare, add a local folder, connect), and Diagnostics for connected PS2 storage.',
     status: 'AVAILABLE',
     platform: DESKTOP,
-    screenshotIds: ['devices', 'prepare'],
+    screenshotIds: ['devices', 'devices-manage'],
     relatedDocSlugs: ['preparing-a-device']
   },
   {
     id: 'library',
     name: 'Library',
     description:
-      'Unified PS2, PS1, and Apps library with grid/list views, status badges, and a detail drawer with contextual actions.',
+      'Unified PS2, PS1, and Apps library with grid/list views, real box art, status badges, and a local-folder import panel.',
     status: 'AVAILABLE',
     platform: DESKTOP,
-    screenshotIds: ['ps2-import', 'apps'],
+    screenshotIds: ['library-grid', 'ps2-import', 'apps'],
     relatedDocSlugs: ['managing-your-library']
   },
   {
     id: 'catalog',
     name: 'Catalog',
-    description: 'Remote metadata and cover-art search applied to local games.',
+    description:
+      'Essentials Catalog with tier/media/priority filters and Smart Fill, plus metadata, cover-art search, and a resumable download center.',
     status: 'AVAILABLE',
     platform: DESKTOP,
-    screenshotIds: [],
+    screenshotIds: ['catalog'],
     relatedDocSlugs: ['artwork-catalog']
   },
   {
@@ -69,7 +70,12 @@ export const productSurfaces: ProductSurfaceData[] = [
     description: 'Manages OPL build/runtime binaries and the PCSX2 compatibility database.',
     status: 'AVAILABLE',
     platform: DESKTOP,
-    screenshotIds: ['essentials-pacman', 'download-pacman-progress', 'legal-confirmation'],
+    screenshotIds: [
+      'components',
+      'essentials-pacman',
+      'download-pacman-progress',
+      'legal-confirmation'
+    ],
     relatedDocSlugs: ['downloads-components']
   },
   {
@@ -87,7 +93,7 @@ export const productSurfaces: ProductSurfaceData[] = [
     description: 'General preferences and configurable download source management.',
     status: 'AVAILABLE',
     platform: DESKTOP,
-    screenshotIds: [],
+    screenshotIds: ['settings-general', 'settings-sources'],
     relatedDocSlugs: ['getting-started']
   },
   {
@@ -97,7 +103,7 @@ export const productSurfaces: ProductSurfaceData[] = [
       'SMB/FTP share so a PS2 can browse and launch the library over the local network without moving the drive.',
     status: 'AVAILABLE',
     platform: DESKTOP,
-    screenshotIds: [],
+    screenshotIds: ['settings-network'],
     relatedDocSlugs: ['network-share-smb-ftp']
   },
   {
@@ -107,7 +113,13 @@ export const productSurfaces: ProductSurfaceData[] = [
       'A companion app for library management and SMB sharing to a PS2, built on Storage Access Framework. Continuous debug-signed APKs are published after every successful build.',
     status: 'AVAILABLE',
     platform: ['android'],
-    screenshotIds: [],
+    screenshotIds: [
+      'mobile-home',
+      'mobile-library',
+      'mobile-diagnostics',
+      'mobile-sharing',
+      'mobile-essentials'
+    ],
     relatedDocSlugs: []
   }
 ];

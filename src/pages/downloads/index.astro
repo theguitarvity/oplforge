@@ -2,11 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import DownloadCard from '../../components/product/DownloadCard.astro';
+import Button from '../../components/ui/Button.astro';
 import { releases } from '../../content/config/releases';
 import { site } from '../../content/config/site';
 
 const releasesLink = site.links.find((link) => link.id === 'github-releases')!;
 const hasAnyRelease = releases.some((release) => release.version !== null);
+const patreonLink = site.links.find((link) => link.id === 'patreon');
+const showPatreon = Boolean(patreonLink?.visible);
 ---
 
 <BaseLayout
@@ -35,11 +38,26 @@ const hasAnyRelease = releases.some((release) => release.version !== null);
       </div>
 
       <p class="text-text-secondary mt-8 text-sm">
-        No release yet for your platform? Follow along or build from source on
+        No release yet for your platform? Follow along or build from source on{' '}
         <a href={releasesLink.url} class="underline" target="_blank" rel="noopener noreferrer">
           GitHub Releases
         </a>.
       </p>
+
+      {
+        showPatreon && patreonLink && (
+          <div class="border-border bg-surface-elevated mt-10 flex flex-col items-start gap-3 rounded-base border p-6 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-text-secondary max-w-xl text-sm">
+              OPL Forge is free, with no ads, no analytics selling your data, and no paywalled
+              features — built and maintained by one person. If it's useful to you, a Patreon
+              pledge helps keep it going, but it's completely optional.
+            </p>
+            <Button href={patreonLink.url} variant="secondary" target="_blank" rel="noopener noreferrer">
+              Support on Patreon
+            </Button>
+          </div>
+        )
+      }
     </Container>
   </section>
 </BaseLayout>

@@ -16,3 +16,14 @@ export function url(path: string): string {
     : `${normalizedPath}/`;
   return `${base}${withTrailingSlash}`;
 }
+
+/**
+ * Builds a base-path-aware URL for a static file in `public/` (favicons,
+ * OG images, etc). Unlike `url()`, this never appends a trailing slash,
+ * since that would break a direct file reference.
+ */
+export function asset(path: string): string {
+  const base = site.basePath.replace(/\/$/, '');
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return `${base}${normalizedPath}`;
+}

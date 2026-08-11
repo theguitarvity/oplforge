@@ -7,13 +7,15 @@ const patreonLink = site.links.find((link) => link.id === 'patreon');
 const showPatreon = Boolean(patreonLink?.visible);
 ---
 
-<section class="border-b border-border py-16" id="support">
+<section class="border-b border-border py-16" id="support" data-reveal>
   <Container>
     <h2 class="font-display text-3xl font-bold text-text-primary">Support development</h2>
     <p class="mt-2 max-w-2xl text-text-secondary">
-      OPL Forge is fully usable without paying anything, and always will be. If you'd like to
-      help fund development time, testing hardware, or infrastructure, that's welcome —
-      <strong class="text-text-primary">optional and never required</strong> to use any feature.
+      OPL Forge is built and maintained by a single person, in their free time, with no company
+      or funding behind it. It's fully usable without paying anything, and always will be. If
+      you'd like to help cover development time, testing hardware, or infrastructure costs,
+      that's welcome — <strong class="text-text-primary">optional and never required</strong> to
+      use any feature.
     </p>
 
     {

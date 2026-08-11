@@ -3,44 +3,64 @@
  * Single source of truth for all color/typography/spacing/radius values.
  * Components MUST reference these tokens (via Tailwind utilities) rather
  * than introducing ad hoc colors.
+ *
+ * Values are synced 1:1 from the desktop/mobile app's own design tokens
+ * (oplforge/src/styles/globals.css `:root` HSL vars and Tailwind status
+ * classes actually used in components), not re-derived approximations:
+ *   --background hsl(246 32% 5%)   -> #090911
+ *   --card       hsl(248 26% 10%)  -> #151320  (surface)
+ *   --muted      hsl(248 20% 16%)  -> #232131  (surface-container)
+ *   --border     hsl(240 14% 18%)  -> #272734
+ *   --primary    hsl(263 90% 66%)  -> #965af6
+ *   hover:bg-violet-500 (Button primary hover) -> #8b5cf6
+ *   --foreground hsl(240 15% 96%)  -> #f3f3f6
+ *   --muted-foreground hsl(240 8% 66%) -> #a1a1af
+ *   --destructive hsl(0 72% 52%)   -> #dd2c2c
+ *   bg-emerald-500 (ready)     -> #10b981
+ *   bg-amber-500 (fragmented)  -> #f59e0b
+ *   text-sky-400 (verifying)  -> #38bdf8
+ * surface-elevated and surface-container-high have no direct app
+ * equivalent (the app only defines 3 dark tiers); they are interpolated
+ * on the same hue/saturation curve between the real background/card/muted
+ * values above.
  */
 :root {
   /* Core surfaces */
-  --color-background: #0e0c12;
-  --color-surface: #141218;
-  --color-surface-elevated: #1c1a22;
-  --color-surface-container: #201e27;
-  --color-surface-container-high: #28252f;
+  --color-background: #090911;
+  --color-surface: #151320;
+  --color-surface-elevated: #1c1a29;
+  --color-surface-container: #232131;
+  --color-surface-container-high: #2e2c3f;
 
   /* Primary / accent */
-  --color-primary: #7c4dff;
-  --color-primary-hover: #9370ff;
-  --color-primary-container: #7c4dff;
+  --color-primary: #965af6;
+  --color-primary-hover: #8b5cf6;
+  --color-primary-container: #965af6;
   --color-on-primary: #ffffff;
-  /* Lighter accent shade for text/links on the dark background: #7c4dff only
-     reaches ~4.0:1 contrast on --color-background, below WCAG AA's 4.5:1 for
-     normal text. Use this token (not --color-primary) whenever the brand
-     accent color is applied as foreground text rather than a button fill. */
-  --color-primary-text: #9370ff;
+  /* On the real app background (#090911), #965af6 itself clears WCAG AA
+     (~4.8:1), so the brand accent can be used directly as foreground text —
+     no separate lightened tint needed. Kept as its own token for semantic
+     clarity at call sites. */
+  --color-primary-text: #965af6;
 
   /* Text */
-  --color-text-primary: #f2f0f5;
-  --color-text-secondary: #b8b3c4;
-  --color-text-muted: #948eaa;
+  --color-text-primary: #f3f3f6;
+  --color-text-secondary: #a1a1af;
+  --color-text-muted: #6a6a7c;
 
   /* Borders */
-  --color-border: #2a2733;
+  --color-border: #272734;
 
   /* Semantic status */
-  --color-success: #22c55e;
-  --color-warning: #eab308;
-  --color-error: #ef4444;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #dd2c2c;
   --color-info: #38bdf8;
 
   /* Per-item runtime/UI data state (distinct from feature-maturity status) */
   --color-fragmented: #f59e0b;
   --color-verifying: #38bdf8;
-  --color-ready: #22c55e;
+  --color-ready: #10b981;
 
   /* Typography */
   --font-display: 'Hanken Grotesk', system-ui, sans-serif;

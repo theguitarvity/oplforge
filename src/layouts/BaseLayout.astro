@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Navigation from '../components/layout/Navigation.astro';
 import Footer from '../components/layout/Footer.astro';
 import { site } from '../content/config/site';
-import { url } from '../utils/url';
+import { url, asset } from '../utils/url';
 
 export interface Props {
   title: string;
@@ -12,6 +12,29 @@ export interface Props {
 
 const { title, description } = Astro.props;
 const pageTitle = title === site.name ? site.name : `${title} · ${site.name}`;
+const canonicalUrl = new URL(url(Astro.url.pathname.replace(site.basePath, '') || '/'), Astro.site);
+const ogImageUrl = new URL(asset('/og-image.png'), Astro.site);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: site.name,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Windows, macOS, Linux, Android',
+  description,
+  url: canonicalUrl.toString(),
+  license: 'https://opensource.org/licenses/MIT',
+  isAccessibleForFree: true,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD'
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Victor Lucas Lopes Silva'
+  }
+};
 ---
 
 <!doctype html>
@@ -19,14 +42,37 @@ const pageTitle = title === site.name ? site.name : `${title} · ${site.name}`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="icon" type="image/png" sizes="32x32" href={asset('/favicon-32.png')} />
+    <link rel="icon" type="image/png" sizes="192x192" href={asset('/favicon-192.png')} />
+    <link rel="icon" type="image/png" sizes="512x512" href={asset('/favicon-512.png')} />
+    <link rel="apple-touch-icon" href={asset('/apple-touch-icon.png')} />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    {
+      // structuredData is fully server-controlled (no user input); JSON is
+      // escaped below to prevent breaking out of the script tag.
+    }
+    {/* eslint-disable astro/no-set-html-directive */}
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')}
+    />
+    {/* eslint-enable astro/no-set-html-directive */}
   </head>
   <body class="flex min-h-screen flex-col bg-background text-text-primary">
     <Navigation />
@@ -34,5 +80,26 @@ const pageTitle = title === site.name ? site.name : `${title} · ${site.name}`;
       <slot />
     </main>
     <Footer />
+    <script>
+      const revealTargets = document.querySelectorAll('[data-reveal]');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (revealTargets.length > 0 && !prefersReducedMotion && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0 }
+        );
+        revealTargets.forEach((target) => observer.observe(target));
+      } else {
+        revealTargets.forEach((target) => target.classList.add('is-visible'));
+      }
+    </script>
   </body>
 </html>

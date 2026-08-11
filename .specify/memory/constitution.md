@@ -159,10 +159,11 @@ significantly without requiring a redesign.
 
 ### V. Forge Dark Design System & Stitch as Reference
 
-The website MUST follow the **Forge Dark** visual identity, including its
-canonical base tokens (e.g. Surface `#141218`, Primary `#7c4dff`), with
-secondary surface, typography, status, and interaction tokens derived from
-the established OPL Forge visual language. The site MUST feel like an
+The website MUST follow the **Forge Dark** visual identity, synced 1:1 from
+the desktop/mobile app's own tokens (e.g. Background `#090911`, Surface
+`#151320`, Primary `#965af6`), with secondary surface, typography, status,
+and interaction tokens derived from the established OPL Forge visual
+language. The site MUST feel like an
 extension of the application: technical, dark, high contrast, dense but
 readable, developer-oriented, tool-like, and precise. Generic SaaS
 aesthetics and excessive gradients, glow, glassmorphism, decorative

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://theguitarvity.github.io/oplforge/sitemap-index.xml

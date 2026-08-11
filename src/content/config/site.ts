@@ -51,8 +51,8 @@ export const site: SiteConfig = {
     {
       id: 'patreon',
       label: 'Patreon',
-      url: 'https://www.patreon.com/',
-      visible: false
+      url: 'https://patreon.com/oplforge',
+      visible: true
     }
   ]
 };

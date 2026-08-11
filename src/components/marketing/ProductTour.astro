@@ -17,7 +17,7 @@ const { variant = 'full' } = Astro.props;
 const surfaces = variant === 'condensed' ? productSurfaces.slice(0, 3) : productSurfaces;
 ---
 
-<section class="border-b border-border py-16">
+<section class="border-b border-border py-16" data-reveal>
   <Container>
     <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
       <div>

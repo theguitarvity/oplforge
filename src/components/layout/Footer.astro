@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { url } from '../../utils/url';
 import { site } from '../../content/config/site';
+import logo from '../../assets/brand/logo.png';
 
 const year = new Date().getFullYear();
 const visibleLinks = site.links.filter((link) => link.visible);
@@ -10,7 +12,8 @@ const visibleLinks = site.links.filter((link) => link.visible);
   <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
     <div class="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
       <div>
-        <a href={url('/')} class="font-display text-lg font-bold text-text-primary">
+        <a href={url('/')} class="flex items-center gap-2 font-display text-lg font-bold text-text-primary">
+          <Image src={logo} alt="" width={28} height={28} class="h-7 w-7" />
           OPL <span class="text-primary-text">Forge</span>
         </a>
         <p class="mt-2 max-w-sm text-sm text-text-muted">{site.tagline}</p>
