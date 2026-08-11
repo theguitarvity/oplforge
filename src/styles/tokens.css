@@ -23,6 +23,14 @@
  * equivalent (the app only defines 3 dark tiers); they are interpolated
  * on the same hue/saturation curve between the real background/card/muted
  * values above.
+ *
+ * --color-primary, --color-primary-text, and --color-text-muted are nudged
+ * a few percent off their exact app-source lightness (constitution Article
+ * VI, WCAG 2.2 AA is non-negotiable; the app's own desktop/mobile UI is not
+ * itself contrast-audited the same way). Each is the app's real hue/
+ * saturation, minimally shifted only enough to clear 4.5:1 in the pairing
+ * actually used on this site — button fill vs. white text, wordmark vs.
+ * surface, and muted text vs. surface, respectively.
  */
 :root {
   /* Core surfaces */
@@ -33,20 +41,22 @@
   --color-surface-container-high: #2e2c3f;
 
   /* Primary / accent */
-  --color-primary: #965af6;
+  --color-primary: #9050f5;
   --color-primary-hover: #8b5cf6;
-  --color-primary-container: #965af6;
+  --color-primary-container: #9050f5;
   --color-on-primary: #ffffff;
-  /* On the real app background (#090911), #965af6 itself clears WCAG AA
-     (~4.8:1), so the brand accent can be used directly as foreground text —
-     no separate lightened tint needed. Kept as its own token for semantic
-     clarity at call sites. */
-  --color-primary-text: #965af6;
+  /* Lighter than --color-primary: used as foreground text (wordmark, links,
+     active-nav state) which can land on any surface tier up to
+     --color-surface-container-high, so it's tuned to clear 4.5:1 there too. */
+  --color-primary-text: #ac7cf8;
 
   /* Text */
   --color-text-primary: #f3f3f6;
   --color-text-secondary: #a1a1af;
-  --color-text-muted: #6a6a7c;
+  /* Tuned to clear 4.5:1 against every surface tier up to
+     --color-surface-container-high (e.g. FeatureCard captions on
+     --color-surface-elevated), not just --color-surface. */
+  --color-text-muted: #9494a3;
 
   /* Borders */
   --color-border: #272734;
